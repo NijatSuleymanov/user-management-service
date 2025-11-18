@@ -541,7 +541,7 @@ user-management-service/
 
 - **Developer:** Nijat Suleymanov
 - **Email:** [snicat894@gmail.com]
-- **GitHub:** [@yourusername](https://github.com/NijatSuleymanov)
+- **GitHub:** [@NijatSuleymanov](https://github.com/NijatSuleymanov)
 
 ## License
 
