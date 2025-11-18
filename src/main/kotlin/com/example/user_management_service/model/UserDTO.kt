@@ -1,10 +1,10 @@
-package com.example.user_management_service.entity
+package com.example.user_management_service.model
 
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "users")
-data class User(
+data class UserDTO(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
@@ -17,5 +17,6 @@ data class User(
 
     val phone: String? = null,
 
-    val role: String? = "USER"
+    @Enumerated(EnumType.STRING)
+    val role: Role? = Role.USER
 )

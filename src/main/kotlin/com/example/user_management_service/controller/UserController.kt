@@ -1,6 +1,6 @@
 package com.example.user_management_service.controller
 
-import com.example.user_management_service.entity.User
+import com.example.user_management_service.dto.UserDTO
 import com.example.user_management_service.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,31 +18,30 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(private val userService: UserService) {
 
     @PostMapping
-    fun createUser(@RequestBody user: User): ResponseEntity<User> {
-        val createdUser = userService.createUser(user)
+    fun createUser(@RequestBody dto: UserDTO): ResponseEntity<UserDTO> {
+        val createdUser = userService.createUser(dto)
         return ResponseEntity(createdUser, HttpStatus.CREATED)
     }
     @GetMapping
-    fun getAllUsers(): ResponseEntity<List<User>> {
+    fun getAllUsers(): ResponseEntity<List<UserDTO>> {
         val users = userService.getAllUsers()
         return ResponseEntity.ok(users)
     }
 
     @GetMapping("/{id}")
-    fun getUserById(@PathVariable id: Long): ResponseEntity<User> {
+    fun getUserById(@PathVariable id: Long): ResponseEntity<UserDTO> {
         val user = userService.getUserById(id)
         return if (user != null) ResponseEntity.ok(user) else ResponseEntity.notFound().build()
     }
 
     @PutMapping("/{id}")
-    fun updateUser(@PathVariable id: Long, @RequestBody user: User): ResponseEntity<User> {
-        val updatedUser = userService.updateUser(id, user)
+    fun updateUser(@PathVariable id: Long, @RequestBody dto: UserDTO): ResponseEntity<UserDTO> {
+        val updatedUser = userService.updateUser(id, dto)
         return if (updatedUser != null) ResponseEntity.ok(updatedUser) else ResponseEntity.notFound().build()
     }
 
     @DeleteMapping("/{id}")
     fun deleteUser(@PathVariable id: Long): ResponseEntity<Void> {
-        val deletedUser = userService.deleteUser(id)
-        return if (deletedUser) ResponseEntity.noContent().build() else ResponseEntity.ok().build()
+        return if (userService.deleteUser(id)) ResponseEntity.noContent().build() else ResponseEntity.notFound().build()
     }
 }
