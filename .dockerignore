@@ -1,0 +1,16 @@
+.git
+.gitignore
+.gradle
+.idea
+*.iml
+*.log
+out/
+.DS_Store
+.env
+.env.local
+target/
+node_modules/
+README.md
+.dockerignore
+Dockerfile
+docker-compose.yml

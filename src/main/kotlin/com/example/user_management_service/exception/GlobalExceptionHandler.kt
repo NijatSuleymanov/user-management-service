@@ -3,6 +3,7 @@ package com.example.user_management_service.exception
 import com.example.user_management_service.response.ErrorResponse
 import com.example.user_management_service.response.ValidationErrorResponse
 import jakarta.servlet.http.HttpServletRequest
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -14,11 +15,14 @@ import org.springframework.web.servlet.NoHandlerFoundException
 @RestControllerAdvice
 class GlobalExceptionHandler {
 
+    private val logger = LoggerFactory.getLogger(GlobalExceptionHandler::class.java)
+
     @ExceptionHandler(ResourceNotFoundException::class)
     fun handleResourceNotFoundException(
         ex: ResourceNotFoundException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
+        logger.warn("ResourceNotFoundException - Message: {}, Path: {}", ex.message, request.requestURI)
         val errorResponse = ErrorResponse(
             status = HttpStatus.NOT_FOUND.value(),
             error = "Resource Not Found",
@@ -34,6 +38,7 @@ class GlobalExceptionHandler {
         ex: DuplicateResourceException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
+        logger.warn("DuplicateResourceException - Message: {}, Path: {}", ex.message, request.requestURI)
         val errorResponse = ErrorResponse(
             status = HttpStatus.CONFLICT.value(),
             error = "Duplicate Resource",
@@ -49,6 +54,7 @@ class GlobalExceptionHandler {
         ex: ValidationException,
         request: HttpServletRequest
     ): ResponseEntity<ValidationErrorResponse> {
+        logger.warn("ValidationException - Message: {}, Path: {}, Fields: {}", ex.message, request.requestURI, ex.fieldErrors)
         val errorResponse = ValidationErrorResponse(
             status = HttpStatus.BAD_REQUEST.value(),
             error = "Validation Failed",
@@ -64,6 +70,7 @@ class GlobalExceptionHandler {
         ex: BusinessException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
+        logger.warn("BusinessException - Message: {}, ErrorCode: {}, Path: {}", ex.message, ex.errorCode, request.requestURI)
         val errorResponse = ErrorResponse(
             status = HttpStatus.BAD_REQUEST.value(),
             error = "Business Logic Error",
@@ -84,6 +91,7 @@ class GlobalExceptionHandler {
             fieldErrors[error.field] = error.defaultMessage ?: "Invalid value"
         }
 
+        logger.warn("MethodArgumentNotValidException - Path: {}, Fields: {}", request.requestURI, fieldErrors)
         val errorResponse = ValidationErrorResponse(
             status = HttpStatus.BAD_REQUEST.value(),
             error = "Validation Failed",
@@ -99,6 +107,7 @@ class GlobalExceptionHandler {
         ex: NoHandlerFoundException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
+        logger.warn("NoHandlerFoundException - Path: {}, Method: {}", ex.requestURL, ex.httpMethod)
         val errorResponse = ErrorResponse(
             status = HttpStatus.NOT_FOUND.value(),
             error = "Endpoint Not Found",
@@ -114,6 +123,7 @@ class GlobalExceptionHandler {
         ex: Exception,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
+        logger.error("Unexpected Exception - Message: {}, Path: {}, StackTrace: ", ex.message, request.requestURI, ex)
         val errorResponse = ErrorResponse(
             status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             error = "Internal Server Error",

@@ -3,9 +3,9 @@ spring:
     name: user-management-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/userdb
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/userdb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
 
   jpa:
     hibernate:
@@ -17,3 +17,19 @@ spring:
 
 server:
   port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.example.user_management_service: DEBUG
+    org.springframework.web: INFO
+    org.springframework.data: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/application.log
+    max-size: 10MB
+    max-history: 30
