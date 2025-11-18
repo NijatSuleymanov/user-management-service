@@ -49,7 +49,7 @@ The User Management Service is a production-ready microservice built with Spring
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/user-management-service.git
+   git clone https://github.com/NijatSuleymanov/user-management-service.git
    cd user-management-service
    ```
 
@@ -539,9 +539,9 @@ user-management-service/
 
 ## Authors
 
-- **Developer:** Nicat
+- **Developer:** Nijat Suleymanov
 - **Email:** [snicat894@gmail.com]
-- **GitHub:** [@yourusername](https://github.com/yourusername)
+- **GitHub:** [@yourusername](https://github.com/NijatSuleymanov)
 
 ## License
 
