@@ -292,37 +292,55 @@ HTTP 204 No Content
 
 The application is **live and deployed** on Render.
 
+### 🌐 Production Environment
+
+**Deployment Platform:** [Render](https://render.com) (Cloud Application Platform)
+
 **Production Base URL:**
 ```
 https://user-management-service-1-1t69.onrender.com
 ```
 
-**Deployment Platform:** Render (Cloud Application Platform)
+**Status:** ✅ Running and accessible
 
-### Live Endpoints
+### 🧪 Example Working Endpoint
 
-The following endpoints are available on the deployed application:
+Test the deployed application right now:
+
+```bash
+➡ GET — https://user-management-service-1-1t69.onrender.com/api/users
+```
+
+Response:
+```json
+{
+    "timestamp": "2025-11-19T10:30:00.000000000",
+    "status": 200,
+    "message": "Users retrieved successfully",
+    "data": [],
+    "error": null
+}
+```
+
+### 📋 Live API Endpoints
+
+All endpoints are available on the deployed application:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/` | Service health check - Returns welcome message |
-| `GET` | `/actuator/health` | Spring Boot actuator health endpoint |
+| `GET` | `/` | Service welcome message |
+| `GET` | `/actuator/health` | Health check status |
 | `POST` | `/api/users` | Create a new user |
 | `GET` | `/api/users` | Retrieve all users |
-| `GET` | `/api/users/{id}` | Retrieve a specific user by ID |
-| `PUT` | `/api/users/{id}` | Update an existing user |
+| `GET` | `/api/users/{id}` | Get specific user by ID |
+| `PUT` | `/api/users/{id}` | Update user details |
 | `DELETE` | `/api/users/{id}` | Delete a user |
 
-### Quick Test Commands
-
-Test the deployed application using curl:
+### 🔗 Quick Test Commands
 
 ```bash
-# Check if service is running
+# Check service status
 curl https://user-management-service-1-1t69.onrender.com/
-
-# Check health status
-curl https://user-management-service-1-1t69.onrender.com/actuator/health
 
 # Get all users
 curl https://user-management-service-1-1t69.onrender.com/api/users
@@ -331,25 +349,36 @@ curl https://user-management-service-1-1t69.onrender.com/api/users
 curl -X POST https://user-management-service-1-1t69.onrender.com/api/users \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","email":"john@example.com","phone":"1234567890"}'
+
+# Get specific user
+curl https://user-management-service-1-1t69.onrender.com/api/users/1
+
+# Update user
+curl -X PUT https://user-management-service-1-1t69.onrender.com/api/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Jane Doe","email":"jane@example.com","phone":"9876543210"}'
+
+# Delete user
+curl -X DELETE https://user-management-service-1-1t69.onrender.com/api/users/1
 ```
 
-### Deployment Details
+### ⚙️ Deployment Configuration
 
-- **Hosting:** Render (https://render.com)
+**Render Setup:**
+- **Auto-deployment:** Enabled from GitHub main branch
 - **Region:** US (default)
 - **Database:** PostgreSQL on Render
-- **Auto-deployment:** Enabled from GitHub main branch
+- **Environment Variables:** Securely managed in Render dashboard
 - **Health Checks:** Configured on `/actuator/health`
-- **Status Page:** https://user-management-service-1-1t69.onrender.com/
+- **Restart Policy:** Automatic restart on crashes
+- **Deployment Strategy:** Zero-downtime deployments
 
-### Render Configuration
-
-The application is configured with the following environment on Render:
-- Auto-deploy from GitHub repository
-- PostgreSQL database instance
-- Environment variables securely managed in Render dashboard
-- Automatic restart on crashes
-- Zero-downtime deployments
+**Features:**
+✅ Automatic deployment on GitHub push
+✅ PostgreSQL database integration
+✅ Environment-based configuration
+✅ Health monitoring and auto-restart
+✅ Request logging and monitoring
 
 ## Logging
 
