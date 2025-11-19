@@ -294,7 +294,7 @@ The application is **live and deployed** on Render.
 
 **Production Base URL:**
 ```
-https://user-management-service.onrender.com
+https://user-management-service-1-1t69.onrender.com
 ```
 
 **Deployment Platform:** Render (Cloud Application Platform)
@@ -319,16 +319,16 @@ Test the deployed application using curl:
 
 ```bash
 # Check if service is running
-curl https://user-management-service.onrender.com/
+curl https://user-management-service-1-1t69.onrender.com/
 
 # Check health status
-curl https://user-management-service.onrender.com/actuator/health
+curl https://user-management-service-1-1t69.onrender.com/actuator/health
 
 # Get all users
-curl https://user-management-service.onrender.com/api/users
+curl https://user-management-service-1-1t69.onrender.com/api/users
 
 # Create a new user
-curl -X POST https://user-management-service.onrender.com/api/users \
+curl -X POST https://user-management-service-1-1t69.onrender.com/api/users \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","email":"john@example.com","phone":"1234567890"}'
 ```
@@ -340,7 +340,7 @@ curl -X POST https://user-management-service.onrender.com/api/users \
 - **Database:** PostgreSQL on Render
 - **Auto-deployment:** Enabled from GitHub main branch
 - **Health Checks:** Configured on `/actuator/health`
-- **Status Page:** https://user-management-service.onrender.com/
+- **Status Page:** https://user-management-service-1-1t69.onrender.com/
 
 ### Render Configuration
 
