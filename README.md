@@ -290,13 +290,66 @@ HTTP 204 No Content
 
 ## Deployment
 
-Currently the application is not deployed to a production environment.
+The application is **live and deployed** on Render.
 
-**Production Base URL:** *(To be updated when deployed)*
+**Production Base URL:**
+```
+https://user-management-service.onrender.com
+```
 
-**Planned Platform:** Railway (to be confirmed)
+**Deployment Platform:** Render (Cloud Application Platform)
 
-Deployment setup will be configured when ready for production release.
+### Live Endpoints
+
+The following endpoints are available on the deployed application:
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/` | Service health check - Returns welcome message |
+| `GET` | `/actuator/health` | Spring Boot actuator health endpoint |
+| `POST` | `/api/users` | Create a new user |
+| `GET` | `/api/users` | Retrieve all users |
+| `GET` | `/api/users/{id}` | Retrieve a specific user by ID |
+| `PUT` | `/api/users/{id}` | Update an existing user |
+| `DELETE` | `/api/users/{id}` | Delete a user |
+
+### Quick Test Commands
+
+Test the deployed application using curl:
+
+```bash
+# Check if service is running
+curl https://user-management-service.onrender.com/
+
+# Check health status
+curl https://user-management-service.onrender.com/actuator/health
+
+# Get all users
+curl https://user-management-service.onrender.com/api/users
+
+# Create a new user
+curl -X POST https://user-management-service.onrender.com/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","email":"john@example.com","phone":"1234567890"}'
+```
+
+### Deployment Details
+
+- **Hosting:** Render (https://render.com)
+- **Region:** US (default)
+- **Database:** PostgreSQL on Render
+- **Auto-deployment:** Enabled from GitHub main branch
+- **Health Checks:** Configured on `/actuator/health`
+- **Status Page:** https://user-management-service.onrender.com/
+
+### Render Configuration
+
+The application is configured with the following environment on Render:
+- Auto-deploy from GitHub repository
+- PostgreSQL database instance
+- Environment variables securely managed in Render dashboard
+- Automatic restart on crashes
+- Zero-downtime deployments
 
 ## Logging
 
