@@ -579,6 +579,7 @@ user-management-service/
 │   ├── main/
 │   │   ├── kotlin/com/example/user_management_service/
 │   │   │   ├── controller/
+│   │   │   │   ├── HomeController.kt
 │   │   │   │   └── UserController.kt
 │   │   │   ├── service/
 │   │   │   │   ├── UserService.kt
